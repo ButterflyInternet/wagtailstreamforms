@@ -71,6 +71,9 @@ class DropdownField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
             ('empty_label', blocks.CharBlock(required=False)),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
@@ -93,6 +96,9 @@ class MultiSelectField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
 
@@ -115,6 +121,9 @@ class RadioField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option")))
         ], icon=self.icon, label=self.label)
 
@@ -137,6 +146,9 @@ class CheckboxesField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
 
@@ -152,6 +164,9 @@ class CheckboxField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
         ], icon=self.icon, label=self.label)
 
 
@@ -175,6 +190,9 @@ class SingleFileField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
         ], icon=self.icon, label=self.label)
 
 
@@ -190,4 +208,7 @@ class MultiFileField(BaseField):
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
         ], icon=self.icon, label=self.label)

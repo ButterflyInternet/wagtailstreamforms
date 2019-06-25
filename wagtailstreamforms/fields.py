@@ -1,13 +1,13 @@
+import json
+
 from django import forms
 from django.core import exceptions
 from django.db import models
 from django.utils.text import capfirst
-
 from wagtail.core import blocks
 
 from wagtailstreamforms import hooks
 from wagtailstreamforms.utils.apps import get_app_submodules
-
 
 _fields = {}
 _searched_for_fields = False
@@ -29,6 +29,7 @@ def register(field_name, cls=None):
         def decorator(cls):
             register(field_name, cls)
             return cls
+
         return decorator
 
     _fields[field_name] = cls
@@ -93,13 +94,25 @@ class BaseField:
         :param block_value: The StreamValue for this field from the StreamField
         :return: The options to be passed into the field, ie ``django.forms.CharField(**options)``
         """
-
-        return {
-            'label': block_value.get('label'),
+        label = block_value.get('label')
+        data = {
+            'label': label,
             'help_text': block_value.get('help_text'),
             'required': block_value.get('required'),
             'initial': block_value.get('default_value')
         }
+        if block_value.get('error_messages'):
+            error_messages = json.loads(block_value.get('error_messages'))
+            for k in error_messages.keys():
+                if '{label}' not in error_messages[k]:
+                    continue
+                if error_messages[k].startswith('{label}'):
+                    error_messages[k] = error_messages[k].format(label=label.capitalize())
+                else:
+                    error_messages[k] = error_messages[k].format(label=label.lower())
+
+            data.update({'error_messages': error_messages})
+        return data
 
     def get_form_block(self):
         """The StreamField StructBlock.
@@ -112,6 +125,9 @@ class BaseField:
             ('label', blocks.CharBlock()),
             ('help_text', blocks.CharBlock(required=False)),
             ('required', blocks.BooleanBlock(required=False)),
+            ('error_messages', blocks.CharBlock(required=False,
+                                                default='{"required": "Please enter {label}"}',
+                                                help_text='Available variable: `{label}`')),
             ('default_value', blocks.CharBlock(required=False)),
         ], icon=self.icon, label=self.label)
 
