@@ -102,16 +102,19 @@ class BaseField:
             'initial': block_value.get('default_value')
         }
         if block_value.get('error_messages'):
-            error_messages = json.loads(block_value.get('error_messages'))
-            for k in error_messages.keys():
-                if '{label}' not in error_messages[k]:
-                    continue
-                if error_messages[k].startswith('{label}'):
-                    error_messages[k] = error_messages[k].format(label=label.capitalize())
-                else:
-                    error_messages[k] = error_messages[k].format(label=label.lower())
+            try:
+                error_messages = json.loads(block_value.get('error_messages'))
+                for k in error_messages.keys():
+                    if '{label}' not in error_messages[k]:
+                        continue
+                    if error_messages[k].startswith('{label}'):
+                        error_messages[k] = error_messages[k].format(label=label.capitalize())
+                    else:
+                        error_messages[k] = error_messages[k].format(label=label.lower())
 
-            data.update({'error_messages': error_messages})
+                data.update({'error_messages': error_messages})
+            except:
+                pass
         return data
 
     def get_form_block(self):
@@ -127,7 +130,7 @@ class BaseField:
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
             ('default_value', blocks.CharBlock(required=False)),
         ], icon=self.icon, label=self.label)
 

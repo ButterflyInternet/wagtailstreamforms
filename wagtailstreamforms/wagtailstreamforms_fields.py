@@ -73,7 +73,7 @@ class DropdownField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
             ('empty_label', blocks.CharBlock(required=False)),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
@@ -98,7 +98,7 @@ class MultiSelectField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
 
@@ -123,7 +123,7 @@ class RadioField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option")))
         ], icon=self.icon, label=self.label)
 
@@ -148,7 +148,7 @@ class CheckboxesField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
             ('choices', blocks.ListBlock(blocks.CharBlock(label="Option"))),
         ], icon=self.icon, label=self.label)
 
@@ -166,7 +166,7 @@ class CheckboxField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
         ], icon=self.icon, label=self.label)
 
 
@@ -192,7 +192,7 @@ class SingleFileField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
         ], icon=self.icon, label=self.label)
 
 
@@ -210,5 +210,5 @@ class MultiFileField(BaseField):
             ('required', blocks.BooleanBlock(required=False)),
             ('error_messages', blocks.CharBlock(required=False,
                                                 default='{"required": "Please enter {label}"}',
-                                                help_text='Available variable: `{label}`')),
+                                                help_text='Available variable: `{label}`, example: {"required": "Please enter {label}"}')),
         ], icon=self.icon, label=self.label)
